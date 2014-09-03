@@ -1,0 +1,43 @@
+apply plugin: 'war'
+apply plugin: 'eclipse'
+
+group='com.chuangtc'
+version = '0.1.2-SNAPSHOT'
+
+
+ext{
+    spring_version='4.0.6.RELEASE'
+    tomcat_webapprunner_version='7.0.40.1'
+    java_version='1.7'
+}
+repositories {
+    mavenCentral()
+}
+configurations{
+    deploy
+}
+dependencies {
+    compile group: 'junit', name: 'junit', version: '4.11'
+    //webapp runner dependencies, to be bundled with Tomcat to be run in cloud 
+    compile files('./src/main/resources/webapp-runner.jar') 
+    deploy  files('./src/main/resources/webapp-runner.jar') 
+    compile 'javax.servlet:javax.servlet-api:3.0.1'
+    //Spring dependencies
+    compile group: 'org.springframework', name: 'spring-core', version: "$spring_version"
+    compile group: 'org.springframework', name: 'spring-web', version: "$spring_version"
+    compile group: 'org.springframework', name: 'spring-webmvc', version: "$spring_version"
+    //It's used when you run web server inside Eclipse
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+}
+
+def dependencyDir = new File("${project.buildDir}/dependency")
+task createDepDir () {
+    dependencyDir.mkdirs()
+}
+
+task copyRuntimeLib(type: Copy, dependsOn: 'createDepDir') {
+    into("$dependencyDir")
+    from configurations.deploy 
+}
+copyRuntimeLib.dependsOn(check)
+build.dependsOn(copyRuntimeLib)

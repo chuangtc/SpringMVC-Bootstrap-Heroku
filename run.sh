@@ -1,3 +1,3 @@
 #!/bin/bash
-export PORT="8080"
-java -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
+export PORT="8088"
+java -jar build/dependency/webapp-runner.jar --port $PORT build/libs/*.war
