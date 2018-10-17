@@ -49,7 +49,7 @@ $ heroku git:remote -a yourapp
 $ git push heroku master
 ```
 ###Libraries Used:
-Spring 4.0.6
+Spring 4.3.18.RELEASE
 Twitter Bootstrap 3.2.0
 Apache Tomcat 7.0.40 (webapp-runner)
 JSP, JQuery 1.11.1
