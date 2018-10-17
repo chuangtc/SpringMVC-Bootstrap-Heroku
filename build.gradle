@@ -6,7 +6,7 @@ version = '0.1.2-SNAPSHOT'
 
 
 ext{
-    spring_version='4.0.6.RELEASE'
+    spring_version='4.3.18.RELEASE'
     tomcat_webapprunner_version='7.0.40.1'
     java_version='1.7'
 }
